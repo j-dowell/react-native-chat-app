@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "basic-chat-starter",
-    "description": "The starter for our basic chat application",
+    "description": "Chat app",
     "slug": "snack-HkKPxprWX",
     "privacy": "unlisted",
     "sdkVersion": "28.0.0",
@@ -23,6 +23,7 @@
     },
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "githubUrl": "https://github.com/j-dowell/react-native-chat-app"
   }
 }
