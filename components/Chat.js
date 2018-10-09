@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { Component} from 'react';
+import { View, KeyboardAvoidingView } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import Fire from '../Fire';
 
-type Props = {
-  name?: string,
-};
 
-class Chat extends React.Component<Props> {
-
+class Chat extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      messages: [],
+    }
+  }
   static navigationOptions = ({ navigation }) => ({
     title: (navigation.state.params || {}).name || 'Chat!',
   });
 
-  state = {
-    messages: [],
-  }
 
   // Start looking for messages. Get messages and add them
   componentDidMount() {
@@ -38,11 +38,14 @@ class Chat extends React.Component<Props> {
   }
   render() {
     return (
-      <GiftedChat
-        messages={this.state.messages}
-        onSend={Fire.shared.send}
-        user={this.user}
-      />
+      <View style={{flex: 1}}>
+        <GiftedChat
+          messages={this.state.messages}
+          onSend={Fire.shared.send}
+          user={this.user}
+        />
+        <KeyboardAvoidingView behavior={'padding'} keyboardVerticalOffset={80}/>
+      </View>
     )
   }
 }

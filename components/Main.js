@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { View, StyleSheet, TextInput, Text, TouchableOpacity } from 'react-native';
 
 class Main extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      name: ''
-    }
-  }
+  static navigationOptions = {
+    title: 'Chatter',
+  };
+
+  state = {
+    name: '',
+  };
+  
   onChangeText = name => {
-    this.setState({
-      name
-    })
+    this.setState({ name })
   }
 
   onPress = () => {
