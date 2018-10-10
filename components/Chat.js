@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { View, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, KeyboardAvoidingView, Platform, ActivityIndicator } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import Fire from '../Fire';
 
@@ -9,6 +9,7 @@ class Chat extends Component {
     super(props)
     this.state = {
       messages: [],
+      isLoading: true
     }
   }
   static navigationOptions = ({ navigation }) => ({
@@ -20,7 +21,8 @@ class Chat extends Component {
   componentDidMount() {
     Fire.shared.on(message => {
       this.setState(previousState => ({
-        messages: GiftedChat.append(previousState.messages, message)
+        messages: GiftedChat.append(previousState.messages, message),
+        isLoading: false
       }))
     });
   }
@@ -40,13 +42,16 @@ class Chat extends Component {
     const offset = (Platform.OS === 'android') ? 80 : 0;
     return (
       <View style={{flex: 1}}>
-        <GiftedChat
-          messages={this.state.messages}
-          onSend={Fire.shared.send}
-          user={this.user}
-        />
-        <KeyboardAvoidingView behavior={ Platform.OS === 'android' ? 'padding' :  null} keyboardVerticalOffset={offset} />
-
+        {this.state.isLoading ? (<ActivityIndicator size="large" color="#0000ff"/>) : (
+          <View style={{flex: 1}}>
+            <GiftedChat
+              messages={this.state.messages}
+              onSend={Fire.shared.send}
+              user={this.user}
+            />
+            <KeyboardAvoidingView behavior={ Platform.OS === 'android' ? 'padding' :  null} keyboardVerticalOffset={offset} />
+          </View>
+        )}
       </View>
     )
   }
