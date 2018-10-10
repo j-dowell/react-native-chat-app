@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { View, KeyboardAvoidingView } from 'react-native';
+import { View, KeyboardAvoidingView, Platform } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import Fire from '../Fire';
 
@@ -37,6 +37,7 @@ class Chat extends Component {
     }
   }
   render() {
+    const offset = (Platform.OS === 'android') ? 80 : 0;
     return (
       <View style={{flex: 1}}>
         <GiftedChat
@@ -44,7 +45,8 @@ class Chat extends Component {
           onSend={Fire.shared.send}
           user={this.user}
         />
-        <KeyboardAvoidingView behavior={'padding'} keyboardVerticalOffset={80}/>
+        <KeyboardAvoidingView behavior={ Platform.OS === 'android' ? 'padding' :  null} keyboardVerticalOffset={offset} />
+
       </View>
     )
   }

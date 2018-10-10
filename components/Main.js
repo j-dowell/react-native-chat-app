@@ -44,12 +44,12 @@ const styles = StyleSheet.create({
     borderColor: '#111111',
     borderWidth: 1,
   },
-  title: { // 4.
+  title: {
     marginTop: offset,
     marginLeft: offset,
     fontSize: offset,
   },
-  buttonText: { // 5.
+  buttonText: { 
     marginLeft: offset,
     fontSize: offset,
   },
